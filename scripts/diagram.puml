@@ -1,11 +1,11 @@
 @startuml
 
 entity Cities{
-    * id: int <<generated>>
+    * id: int
     --
     * name: varchar
-    * latitude: float
-    * longitude: float
+    * latitude: numeric
+    * longitude: numeric
 }
 entity Sellers{
     * id: int <<generated>>

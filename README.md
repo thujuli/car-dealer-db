@@ -32,9 +32,113 @@ This my final project for RDMS using PostgreSQL.....
 - Buyer can bid more than one Ad
 - Buyers and Sellers can have the same Domicili
 
-### Table Structure, Relations and Constraints (Business Rules)
+### Table Structure and Relations
 
-![Table Structure, Relations and Constraints (Business Rules)](images/diagram.png?raw=true "Table Structure, Relations and Constraints (Business Rules)
-")
+![Table Structure and Relations](images/diagram.png?raw=true "Table Structureand Relations")
+
+### Constraints and Business Rules
+
+#### Cities
+
+##### Constraints
+
+- id: int not null
+- name: varchar(255) not null
+- latitude: numeric not null
+- longitude: numeric not null
+
+##### Business Rules
+
+- All fields cannot be empty
+
+#### Sellers
+
+##### Constraints
+
+- id: serial
+- city_id: int not null
+- name: varchar(255) not null
+- phone: varchar(20) not null
+- primary key (id)
+- constraint phone_unique unique (phone)
+
+##### Business Rules
+
+- Primary key auto increment
+- All fields cannot be empty
+- Phone number cannot be the same (unique)
+
+#### Buyers
+
+##### Constraints
+
+- id: serial
+- city_id: int not null
+- name: varchar(255) not null
+- phone: numeric(20) not null
+- primary key (id)
+- constraint phone_unique unique (phone)
+
+##### Business Rules
+
+- Primary key auto increment
+- All fields cannot be empty
+- Phone number cannot be the same (unique)
+
+#### Cars
+
+##### Constraints
+
+- id: serial
+- seller_id: int not null
+- brand: varchar(255) not null
+- model: varchar(255) not null
+- type: varchar(255) not null
+- year: date not null
+- price: int not null
+- primary key (id)
+- constraint price_check check (price > 0)
+
+##### Business Rules
+
+- Primary key auto increment
+- All fields cannot be empty
+- Price must be greater than 0
+
+#### Ads
+
+##### Constraints
+
+- id: serial
+- seller_id: int not null
+- car_id: int not null
+- title: varchar(255) not null
+- primary key (id)
+
+##### Business Rules
+
+- Primary key auto increment
+- All fields cannot be empty
+
+#### Bids
+
+##### Constraints
+
+- create type status as enum ('sent', 'cancel')
+- id: serial
+- buyer_id: int not null
+- ad_id: int not null
+- date: date not null
+- price: int not null
+- status: status not null
+- primary key (id)
+- constraint price_check check (price > 0)
+
+##### Business Rules
+
+- Primary key auto increment
+- All fields cannot be empty
+- Price must be greater than 0
+- Status must be sent or cancel
 
 ## Implementation To The Database Server
