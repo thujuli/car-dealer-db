@@ -1,0 +1,30 @@
+@startuml
+entity Cities{
+    name: varchar
+    latitude: float
+    longitude: float
+}
+entity Sellers{
+    name: int
+    phone: varchar
+}
+entity Buyers{
+    name: int
+    phone: varchar
+}
+entity Ads{
+    title: varchar
+}
+entity Cars{
+    brand: varchar
+    model: varchar
+    type: varchar
+    year: date
+    price: int
+}
+entity Bids{
+    date: date
+    price: int
+    status: enum
+}
+@enduml

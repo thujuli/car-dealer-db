@@ -1,0 +1,59 @@
+@startuml
+
+entity Cities{
+    * id: int <<generated>>
+    --
+    * name: varchar
+    * latitude: float
+    * longitude: float
+}
+entity Sellers{
+    * id: int <<generated>>
+    --
+    * city_id: int <<FK>>
+    * name: int
+    * phone: varchar <<unique>>
+}
+entity Buyers{
+    * id: int <<generated>>
+    --
+    * city_id: int <<FK>>
+    * name: int
+    * phone: varchar <<unique>>
+}
+entity Ads{
+    * id: int <<generated>>
+    --
+    * seller_id: int <<FK>>
+    * car_id: int <<FK>>
+    * title: varchar
+}
+entity Cars{
+    * id: int <<generated>>
+    --
+    * seller_id: int <<FK>>
+    * brand: varchar
+    * model: varchar
+    * type: varchar
+    * year: date
+    * price: int
+}
+entity Bids{
+    * id: int <<generated>>
+    --
+    * buyer_id: int <<FK>>
+    * ad_id: int <<FK>>
+    * date: date
+    * price: int
+    * status: enum
+}
+
+Cities ||..|{ Sellers
+Cities ||..|{ Buyers
+Sellers |o..|{ Cars
+Sellers |o..|{ Ads
+Cars |o..|| Ads
+Ads |o..|{ Bids
+Buyers |o..|{ Bids
+
+@enduml

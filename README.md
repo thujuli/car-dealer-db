@@ -22,40 +22,7 @@ This my final project for RDMS using PostgreSQL.....
 
 ### Entities and Attributes
 
-<!--
-@startuml entities-attributes
-entity Cities{
-    name: varchar
-    latitude: float
-    longitude: float
-}
-entity Sellers{
-    name: int
-    phone: varchar
-}
-entity Buyers{
-    name: int
-    phone: varchar
-}
-entity Ads{
-    title: varchar
-}
-entity Cars{
-    brand: varchar
-    model: varchar
-    type: varchar
-    year: date
-    price: int
-}
-entity Bids{
-    date: date
-    price: int
-    status: enum
-}
-@enduml
--->
-
-![](entities-attributes.svg)
+![Entities and Attributes](images/entities-attributes.png?raw=true "Entities and Attributes")
 
 ### Relations
 
@@ -65,68 +32,9 @@ entity Bids{
 - Buyer can bid more than one Ad
 - Buyers and Sellers can have the same Domicili
 
-### Table Structure, Relations and Constraint (Business Rules)
+### Table Structure, Relations and Constraints (Business Rules)
 
-```plantuml
-@startuml
-
-entity Cities{
-    * id: int <<generated>>
-    --
-    * name: varchar
-    * latitude: float
-    * longitude: float
-}
-entity Sellers{
-    * id: int <<generated>>
-    --
-    * city_id: int <<FK>>
-    * name: int
-    * phone: varchar <<unique>>
-}
-entity Buyers{
-    * id: int <<generated>>
-    --
-    * city_id: int <<FK>>
-    * name: int
-    * phone: varchar <<unique>>
-}
-entity Ads{
-    * id: int <<generated>>
-    --
-    * seller_id: int <<FK>>
-    * car_id: int <<FK>>
-    * title: varchar
-}
-entity Cars{
-    * id: int <<generated>>
-    --
-    * seller_id: int <<FK>>
-    * brand: varchar
-    * model: varchar
-    * type: varchar
-    * year: date
-    * price: int
-}
-entity Bids{
-    * id: int <<generated>>
-    --
-    * buyer_id: int <<FK>>
-    * ad_id: int <<FK>>
-    * date: date
-    * price: int
-    * status: enum
-}
-
-Cities ||..|{ Sellers
-Cities ||..|{ Buyers
-Sellers |o..|{ Cars
-Sellers |o..|{ Ads
-Cars |o..|| Ads
-Ads |o..|{ Bids
-Buyers |o..|{ Bids
-
-@enduml
-```
+![Table Structure, Relations and Constraints (Business Rules)](images/diagram.png?raw=true "Table Structure, Relations and Constraints (Business Rules)
+")
 
 ## Implementation To The Database Server
