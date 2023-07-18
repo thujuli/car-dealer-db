@@ -22,8 +22,8 @@ This my final project for RDMS using PostgreSQL.....
 
 ### Entities and Attributes
 
-```plantuml
-@startuml
+<!--
+@startuml entities-attributes
 entity Cities{
     name: varchar
     latitude: float
@@ -53,7 +53,9 @@ entity Bids{
     status: enum
 }
 @enduml
-```
+-->
+
+![](entities-attributes.svg)
 
 ### Relations
 
