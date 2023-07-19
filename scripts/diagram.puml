@@ -35,7 +35,7 @@ entity Cars{
     * brand: varchar
     * model: varchar
     * type: varchar
-    * year: date
+    * year: int
     * price: int
 }
 entity Bids{

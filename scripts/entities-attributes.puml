@@ -1,8 +1,8 @@
 @startuml
 entity Cities{
     name: varchar
-    latitude: float
-    longitude: float
+    latitude: numeric 
+    longitude: numeric
 }
 entity Sellers{
     name: int
@@ -19,7 +19,7 @@ entity Cars{
     brand: varchar
     model: varchar
     type: varchar
-    year: date
+    year: int
     price: int
 }
 entity Bids{
