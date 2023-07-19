@@ -86,7 +86,7 @@ psql --username=postgres --dbname=postgres --password
 #### Create database for store all tables
 
 ```sql
-CREATE DATABASE car-dealer;
+CREATE DATABASE car_dealer;
 ```
 
 #### Exit from PostgreSQL Client (psql)
@@ -98,13 +98,13 @@ exit
 #### Create all tables from sql script
 
 ```
-psql --username=postgres --dbname=car-dealer --password --file=sql/ddl.sql
+psql --username=postgres --dbname=car_dealer --password --file=sql/ddl.sql
 ```
 
 #### Connect to new database
 
 ```
-psql --username=postgres --dbname=car-dealer --password
+psql --username=postgres --dbname=car_dealer --password
 ```
 
 #### Checks all tables already exists
