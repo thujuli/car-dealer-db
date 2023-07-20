@@ -22,7 +22,7 @@ This my final project for RDMS using PostgreSQL.....
 
 ### Entities and Attributes
 
-![Entities and Attributes](images/entities-attributes.png?raw=true "Entities and Attributes")
+![Entities and Attributes](diagram/images/entities-attributes.png?raw=true "Entities and Attributes")
 
 ### Relations
 
@@ -34,7 +34,7 @@ This my final project for RDMS using PostgreSQL.....
 
 ### Table Structure and Relations
 
-![Table Structure and Relations](images/diagram.png?raw=true "Table Structureand Relations")
+![Table Structure and Relations](diagram/images/diagram.png?raw=true "Table Structureand Relations")
 
 ### Business Rules
 
