@@ -1,58 +1,11 @@
-from faker import Faker
-import random
-import csv
-
-
-def csv_to_list(file_read: str) -> list:
-    """
-    Read csv file and convert to list of dictionary
-    """
-    list_of_dict = []
-
-    with open(f"{file_read}.csv", "r") as csv_file:
-        csv_reader = csv.DictReader(csv_file)
-
-        for row in csv_reader:
-            list_of_dict.append(row)
-
-    return list_of_dict
-
-
-def list_to_csv(list_of_dict: list, file_write: str) -> None:
-    """
-    Write to csv file from list of dictionary
-    """
-    with open(f"{file_write}.csv", "w") as csv_file:
-        fieldnames = [_ for _ in list_of_dict[0]]
-        csv_writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
-
-        csv_writer.writeheader()
-        for row in list_of_dict:
-            csv_writer.writerow(row)
-
-
-def list_of_sellers(n_generated: int, list_of_dict: list) -> list:
-    """
-    Generate list of dictionary for sellers
-    """
-    fake = Faker(["id_ID"])
-    sellers = []
-
-    # get city_id from city (list of dict)
-    city_id = [sample_city[i]["kota_id"] for i in range(len(list_of_dict))]
-
-    for i in range(n_generated):
-        # id, city_id, name, phone
-        sellers.append(
-            {
-                "id": i + 1,
-                "city_id": random.choice(city_id),
-                "name": fake.name(),
-                "phone": fake.phone_number(),
-            }
-        )
-
-    return sellers
+from function.csv_list import csv_to_list, list_to_csv
+from function.generate_list import (
+    list_of_city,
+    list_of_users,
+    list_of_car,
+    list_of_ads,
+    list_of_bids,
+)
 
 
 if __name__ == "__main__":
@@ -60,5 +13,16 @@ if __name__ == "__main__":
     sample_city = csv_to_list("sample/city")
     sample_car = csv_to_list("sample/car_product")
 
-    sellers = list_of_sellers(100, sample_city)
+    cities = list_of_city(sample_city)
+    sellers = list_of_users(10, cities)
+    buyers = list_of_users(15, cities)
+    cars = list_of_car(sample_car, sellers)
+    ads = list_of_ads(10, sellers, cars)
+    bids = list_of_bids(10, buyers, ads)
+
+    list_to_csv(cities, "final/cities")
+    list_to_csv(buyers, "final/buyers")
     list_to_csv(sellers, "final/sellers")
+    list_to_csv(cars, "final/cars")
+    list_to_csv(ads, "final/ads")
+    list_to_csv(bids, "final/bids")
