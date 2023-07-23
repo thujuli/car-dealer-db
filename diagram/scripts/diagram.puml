@@ -24,7 +24,6 @@ entity Buyers{
 entity Ads{
     * id: int <<generated>>
     --
-    * seller_id: int <<FK>>
     * car_id: int <<FK>>
     * title: varchar
 }
@@ -48,12 +47,11 @@ entity Bids{
     * status: enum
 }
 
-Cities ||..|{ Sellers
-Cities ||..|{ Buyers
-Sellers |o..|{ Cars
-Sellers |o..|{ Ads
-Cars |o..|| Ads
-Ads |o..|{ Bids
-Buyers |o..|{ Bids
+Cities ||..o{ Sellers
+Cities ||..o{ Buyers
+Sellers ||..o{ Cars
+Cars ||..o{ Ads
+Ads ||..o{ Bids
+Buyers ||..o{ Bids
 
 @enduml

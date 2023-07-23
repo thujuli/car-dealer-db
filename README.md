@@ -26,15 +26,15 @@ This my final project for RDMS using PostgreSQL.....
 
 ### Relations
 
-- Seller can sell more than one Car
-- Seller can advertise the Car
-- One Car has only one Ad
-- Buyer can bid more than one Ad
-- Buyers and Sellers can have the same Domicili
+- One City can have many Users (Sellers and Buyers)
+- One Seller can own many Cars
+- One Car can have many Ads
+- One Buyer can bid many Ads
+- One Advertisment offered be many Buyers
 
 ### Table Structure and Relations
 
-![Table Structure and Relations](diagram/images/diagram.png?raw=true "Table Structureand Relations")
+![Table Structure and Relations](diagram/images/diagram.png?raw=true "Table Structure and Relations")
 
 ### Business Rules
 
@@ -158,6 +158,7 @@ psql --username=postgres --dbname=car_dealer --command="\copy cities from 'final
 
 # import for table sellers
 psql --username=postgres --dbname=car_dealer --command="\copy sellers from 'final/sellers.csv' delimiter ',' csv header" --password
+
 # import for table buyers
 psql --username=postgres --dbname=car_dealer --command="\copy buyers from 'final/buyers.csv' delimiter ',' csv header" --password
 
@@ -198,3 +199,7 @@ psql --username=postgres --dbname=car_dealer --command="select * from bids;" --p
 ```bash
 cd ..
 ```
+
+## Test Backup And Restore Database
+
+#### Backup database

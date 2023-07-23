@@ -46,11 +46,9 @@ CREATE TABLE cars
 CREATE TABLE ads 
 (
 	id serial, 
-	seller_id int NOT NULL,
 	car_id int NOT NULL,
 	title varchar(255) NOT NULL,
 	PRIMARY KEY (id),
-	CONSTRAINT fk_seller_ad FOREIGN KEY (seller_id) REFERENCES sellers (id),
 	CONSTRAINT fk_car_ad FOREIGN KEY (car_id) REFERENCES cars (id)
 );
 

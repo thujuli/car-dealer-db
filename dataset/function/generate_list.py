@@ -81,22 +81,21 @@ def list_of_ads(n_generated: int, car_list: list) -> list:
     ads = []
 
     # get id from seller_list (list of dict)
-    seller_id = [car_list[i]["seller_id"] for i in range(len(car_list))]
+    car_id = [car_list[i]["id"] for i in range(len(car_list))]
 
     for i in range(n_generated):
-        seller_id_choice = random.choice(seller_id)
+        # seller_id_choice = random.choice(seller_id)
 
         # get car id from car_list
-        car_id_from_seller = []
-        for j in range(len(car_list)):
-            if car_list[j]["seller_id"] == seller_id_choice:
-                car_id_from_seller.append(car_list[j]["id"])
-
+        # car_id_from_seller = []
+        # for j in range(len(car_list)):
+        #     if car_list[j]["seller_id"] == seller_id_choice:
+        #         car_id_from_seller.append(car_list[j]["id"])
+        #
         ads.append(
             {
                 "id": i + 1,
-                "seller_id": seller_id_choice,
-                "car_id": random.choice(car_id_from_seller),
+                "car_id": random.choice(car_id),
                 "title": fake.sentence(nb_words=4, variable_nb_words=False),
             }
         )
