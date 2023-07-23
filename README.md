@@ -74,41 +74,127 @@ This my final project for RDMS using PostgreSQL.....
 - Status must be sent or cancel
 - Default status is sent
 
+## Setup Project
+
+#### Clone this repository
+
+```bash
+# clone using ssh
+git clone git@github.com:thujuli/car-dealer-db.git
+
+# clone using https
+git clone https://github.com/thujuli/car-dealer-db.git
+```
+
+#### Change directory to this repository
+
+```bash
+cd car-dealer-db/
+```
+
 ## Implementation To The Database Server
 
-#### Connect to PostgreSQL Client (psql)
+#### Create new database using psql
 
-```
-# example create connection to database postgres
-psql --username=postgres --dbname=postgres --password
-```
-
-#### Create database for store all tables
-
-```sql
-CREATE DATABASE car_dealer;
-```
-
-#### Exit from PostgreSQL Client (psql)
-
-```
-exit
+```bash
+psql --username=postgres --command="CREATE DATABASE car_dealer;" --password
 ```
 
 #### Create all tables from sql script
 
-```
+```bash
 psql --username=postgres --dbname=car_dealer --password --file=sql/ddl.sql
-```
-
-#### Connect to new database
-
-```
-psql --username=postgres --dbname=car_dealer --password
 ```
 
 #### Checks all tables already exists
 
+```bash
+psql --username=postgres --dbname=car_dealer --command="\dt" --password
 ```
-\dt
+
+## Create And Input Dummy Data For Each Table
+
+#### Create virtual environment
+
+```bash
+python -m venv .venv
+```
+
+#### Use the virtual environment
+
+```bash
+source .venv/bin/activate
+```
+
+#### Install third party packages from requirements.txt
+
+```bash
+pip install -r requirements.txt
+```
+
+#### Change directory to dataset
+
+```bash
+cd dataset/
+```
+
+#### Run python script
+
+```bash
+python main.py
+```
+
+#### Checks all created csv files
+
+```bash
+ls final/
+```
+
+#### Import csv files (dummy data) for each table
+
+```bash
+# import for table cities
+psql --username=postgres --dbname=car_dealer --command="\copy cities from 'final/cities.csv' delimiter ',' csv header" --password
+
+# import for table sellers
+psql --username=postgres --dbname=car_dealer --command="\copy sellers from 'final/sellers.csv' delimiter ',' csv header" --password
+# import for table buyers
+psql --username=postgres --dbname=car_dealer --command="\copy buyers from 'final/buyers.csv' delimiter ',' csv header" --password
+
+# import for table cars
+psql --username=postgres --dbname=car_dealer --command="\copy cars from 'final/cars.csv' delimiter ',' csv header" --password
+
+# import for table ads
+psql --username=postgres --dbname=car_dealer --command="\copy ads from 'final/ads.csv' delimiter ',' csv header" --password
+
+# import for table bids
+psql --username=postgres --dbname=car_dealer --command="\copy bids from 'final/bids.csv' delimiter ',' csv header" --password
+```
+
+#### Test queries to each table
+
+```bash
+# queries table cities
+psql --username=postgres --dbname=car_dealer --command="select * from cities;" --password
+
+# queries table sellers
+psql --username=postgres --dbname=car_dealer --command="select * from sellers;" --password
+
+# queries table buyers
+psql --username=postgres --dbname=car_dealer --command="select * from buyers;" --password
+
+# queries table cars
+psql --username=postgres --dbname=car_dealer --command="select * from cars;" --password
+
+# queries table ads
+psql --username=postgres --dbname=car_dealer --command="select * from ads;" --password
+
+# queries table bids
+psql --username=postgres --dbname=car_dealer --command="select * from bids;" --password
+```
+
+#### Back to main directory
+
+```bash
+cd ..
 ```
