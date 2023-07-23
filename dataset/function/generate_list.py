@@ -73,7 +73,7 @@ def list_of_users(n_generated: int, city_list: list) -> list:
     return users
 
 
-def list_of_ads(n_generated: int, seller_list: list, car_list: list) -> list:
+def list_of_ads(n_generated: int, car_list: list) -> list:
     """
     Generate list of dictionary for ads
     """
@@ -81,7 +81,7 @@ def list_of_ads(n_generated: int, seller_list: list, car_list: list) -> list:
     ads = []
 
     # get id from seller_list (list of dict)
-    seller_id = [seller_list[i]["id"] for i in range(len(seller_list))]
+    seller_id = [car_list[i]["seller_id"] for i in range(len(car_list))]
 
     for i in range(n_generated):
         seller_id_choice = random.choice(seller_id)
