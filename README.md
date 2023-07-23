@@ -172,7 +172,7 @@ psql --username=postgres --dbname=car_dealer --command="\copy ads from 'final/ad
 psql --username=postgres --dbname=car_dealer --command="\copy bids from 'final/bids.csv' delimiter ',' csv header" --password
 ```
 
-#### Test queries to each table
+#### test queries to each table
 
 ```bash
 # queries table cities
@@ -200,6 +200,44 @@ psql --username=postgres --dbname=car_dealer --command="select * from bids;" --p
 cd ..
 ```
 
-## Test Backup And Restore Database
+## Backup And Restore Database
 
-#### Backup database
+#### Backup database using pg_dump
+
+```bash
+pg_dump --username=postgres --dbname=car_dealer --password > backup/db.sql
+```
+
+#### Create a new database to restore the database
+
+```bash
+psql --username=postgres --command="CREATE DATABASE restore_car_dealer;" --password
+```
+
+#### Restore database using psql
+
+```bash
+pg_dump --username=postgres --dbname=restore_car_dealer --file=backup/db.sql --password > backup/db.sql
+```
+
+#### Test queries to each table
+
+```bash
+# queries table cities
+psql --username=postgres --dbname=restore_car_dealer --command="select * from cities;" --password
+
+# queries table sellers
+psql --username=postgres --dbname=restore_car_dealer --command="select * from sellers;" --password
+
+# queries table buyers
+psql --username=postgres --dbname=restore_car_dealer --command="select * from buyers;" --password
+
+# queries table cars
+psql --username=postgres --dbname=restore_car_dealer --command="select * from cars;" --password
+
+# queries table ads
+psql --username=postgres --dbname=restore_car_dealer --command="select * from ads;" --password
+
+# queries table bids
+psql --username=postgres --dbname=restore_car_dealer --command="select * from bids;" --password
+```
