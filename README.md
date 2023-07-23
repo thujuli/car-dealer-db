@@ -64,6 +64,7 @@ This my final project for RDMS using PostgreSQL.....
 
 - Primary key auto increment
 - All fields cannot be empty
+- Default date is current date
 
 #### Bids
 
@@ -172,7 +173,7 @@ psql --username=postgres --dbname=car_dealer --command="\copy ads from 'final/ad
 psql --username=postgres --dbname=car_dealer --command="\copy bids from 'final/bids.csv' delimiter ',' csv header" --password
 ```
 
-#### test queries to each table
+#### Test queries to each table
 
 ```bash
 # queries table cities
@@ -240,4 +241,46 @@ psql --username=postgres --dbname=restore_car_dealer --command="select * from ad
 
 # queries table bids
 psql --username=postgres --dbname=restore_car_dealer --command="select * from bids;" --password
+```
+
+## Transactional Query
+
+#### Look for cars with a production date greater than 2015
+
+```sql
+SELECT * FROM cars
+WHERE "year" > 2015;
+```
+
+#### Add one new record to the Bids Table
+
+```sql
+/* insert record */
+INSERT INTO bids (id, buyer_id, ad_id, price, status)
+VALUES (101, 3, 25,350000000, 'sent' );
+
+/* query select */
+SELECT * FROM  bids;
+```
+
+#### Find all cars owned by one user and sort by newest
+
+```sql
+/* example, seller name is 'Damu Samosir' */
+SELECT c.id AS card_id, c.brand, c.model, c.year, c.price, a.date
+FROM cars AS c
+JOIN sellers AS s ON c.seller_id = s.id
+JOIN ads AS a ON c.id = a.car_id
+WHERE s.name = 'Damu Samosir'
+ORDER BY a.date DESC;
+```
+
+#### Find all cars by model name and sort by low price
+
+```sql
+/*example model name is 'yaris'*/
+SELECT *
+FROM cars
+WHERE model ILIKE '%yaris%'
+ORDER BY price ASC;
 ```
