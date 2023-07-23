@@ -26,6 +26,7 @@ entity Ads{
     --
     * car_id: int <<FK>>
     * title: varchar
+    * date: date 
 }
 entity Cars{
     * id: int <<generated>>

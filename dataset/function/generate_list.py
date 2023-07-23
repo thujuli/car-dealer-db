@@ -84,19 +84,21 @@ def list_of_ads(n_generated: int, car_list: list) -> list:
     car_id = [car_list[i]["id"] for i in range(len(car_list))]
 
     for i in range(n_generated):
-        # seller_id_choice = random.choice(seller_id)
+        # generate date (range from 2022-10-01 to 2022-11-30)
+        start_date = datetime.date(2022, 10, 1)
+        end_date = datetime.date(2022, 11, 30)
 
-        # get car id from car_list
-        # car_id_from_seller = []
-        # for j in range(len(car_list)):
-        #     if car_list[j]["seller_id"] == seller_id_choice:
-        #         car_id_from_seller.append(car_list[j]["id"])
-        #
+        num_days = (end_date - start_date).days
+        rand_days = random.randint(1, num_days)
+        random_date = start_date + datetime.timedelta(days=rand_days)
+
+        # adding dict to list
         ads.append(
             {
                 "id": i + 1,
                 "car_id": random.choice(car_id),
                 "title": fake.sentence(nb_words=4, variable_nb_words=False),
+                "date": random_date,
             }
         )
 
@@ -114,9 +116,9 @@ def list_of_bids(n_generated: int, buyer_list: list, ad_list: list) -> list:
     ad_id = [ad_list[i]["id"] for i in range(len(ad_list))]
 
     for i in range(n_generated):
-        # generate date (range from 2022-10-01 to 2022-11-30)
-        start_date = datetime.date(2022, 10, 1)
-        end_date = datetime.date(2022, 11, 30)
+        # generate date (range from 2022-12-01 to 2022-12-31)
+        start_date = datetime.date(2022, 12, 1)
+        end_date = datetime.date(2022, 12, 31)
 
         num_days = (end_date - start_date).days
         rand_days = random.randint(1, num_days)

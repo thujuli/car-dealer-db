@@ -48,6 +48,7 @@ CREATE TABLE ads
 	id serial, 
 	car_id int NOT NULL,
 	title varchar(255) NOT NULL,
+	date date NOT NULL DEFAULT current_date,
 	PRIMARY KEY (id),
 	CONSTRAINT fk_car_ad FOREIGN KEY (car_id) REFERENCES cars (id)
 );
